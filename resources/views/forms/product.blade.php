@@ -4,11 +4,11 @@
     <div class="container">
         <div class="row">
             <div class="col-12">
-                @if(Route::is('admin.product.edit'))
-                    <form method="POST" action="{{route('admin.product.update', $entry->id)}}" enctype="multipart/form-data">
+                @if(Route::is('product.edit'))
+                    <form method="POST" action="{{route('product.update', $entry->id)}}" enctype="multipart/form-data">
                     @method('PUT')
                 @else
-                <form method="POST" action="{{route('admin.product.store')}}" enctype="multipart/form-data">
+                <form method="POST" action="{{route('product.store')}}" enctype="multipart/form-data">
                     @endif
                     @csrf
                     <div class="container-fluid">

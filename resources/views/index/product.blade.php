@@ -16,10 +16,10 @@
                     <div class="product-desc">
                         <p>{{ $product->description }}</p>
                     </div>
-                    <a href="{{route('catalog.index')}}" class="btn btn-primary">Wróć do katalogu</a>
+                    <a href="{{route('product.index')}}" class="btn btn-primary">Wróć do katalogu</a>
                     @auth
                     <a href="#" class="btn btn-success">Edytuj produkt</a>
-                    <form method="POST" action="{{route('admin.product.delete', $product->id)}}">
+                    <form method="POST" action="{{route('product.delete', $product->id)}}">
                         {{ csrf_field() }}
                         {{ method_field('DELETE') }}
                         <button type="submit" class="btn btn-danger confirm">Usuń produkt</button>

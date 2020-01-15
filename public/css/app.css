@@ -17,6 +17,10 @@ img {display:block;max-width: 100%;height: auto}
 b, strong {font-weight: 900}
 p {margin:0}
 
+/* Header
+================================================== */
+header {padding:20px;border-bottom:1px solid #7abaff}
+
 /* Products list
 ================================================== */
 #products-list, #product {padding-top: 70px;padding-bottom: 70px}

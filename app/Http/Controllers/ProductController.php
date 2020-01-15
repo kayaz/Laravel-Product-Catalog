@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreProducts;
-use App\Products;
+use App\Http\Requests\StoreProduct;
+use App\Product;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
 
-class IndexController extends Controller
+class ProductController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +15,7 @@ class IndexController extends Controller
      */
     public function index()
     {
-        return view('index.index', ['products' => Products::all()]);
+        return view('index.index', ['products' => Product::all()]);
     }
 
     /**
@@ -29,10 +28,10 @@ class IndexController extends Controller
         return view('forms.product',
             [
                 'cardtitle' => 'Dodaj produkt',
-                'thumbwidth' => Products::IMG_WIDTH,
-                'thumbheight' => Products::IMG_HEIGHT
+                'thumbwidth' => Product::IMG_WIDTH,
+                'thumbheight' => Product::IMG_HEIGHT
             ])
-            ->with('entry', Products::make());
+            ->with('entry', Product::make());
     }
 
     /**
@@ -41,9 +40,9 @@ class IndexController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreProducts $request)
+    public function store(StoreProduct $request)
     {
-        Products::create($request->only(
+        Product::create($request->only(
             [
                 'name',
                 'price',
@@ -62,22 +61,22 @@ class IndexController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Products  $products
+     * @param  \App\Product  $products
      * @return \Illuminate\Http\Response
      */
     public function show($slug)
     {
-        $product = Products::where('slug', $slug)->firstOrFail();
+        $product = Product::where('slug', $slug)->firstOrFail();
         return view('index.product', ['product' => $product]);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Products  $products
+     * @param  \App\Product  $products
      * @return \Illuminate\Http\Response
      */
-    public function edit(Products $products)
+    public function edit(Product $products)
     {
         //
     }
@@ -86,10 +85,10 @@ class IndexController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Products  $products
+     * @param  \App\Product  $products
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Products $products)
+    public function update(Request $request, Product $products)
     {
         //
     }
@@ -97,10 +96,10 @@ class IndexController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Products  $products
+     * @param  \App\Product  $products
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Products $products)
+    public function destroy(Product $products)
     {
         //$products->deleteThumb();
         $products->delete();

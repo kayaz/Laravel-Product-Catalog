@@ -1,20 +1,16 @@
 <?php
 // Login
-Route::get('login',                             'Auth\LoginController@showLoginForm')->name('login');
-Route::post('login',                            'Auth\LoginController@login');
-Route::post('logout',                           'Auth\LoginController@logout')->name('logout');
-
-// Catalog
-Route::get('/',                         'IndexController@index')->name('catalog.index');
-
-// Product
-Route::get('/{slug}',                   'IndexController@show')->name('catalog.product');
+Auth::routes();
 
 // Admin
-Route::group(['prefix'=>'/product/', 'as' => 'admin.product.', 'middleware' => 'auth'], function() {
+Route::group(['as' => 'product.'], function() {
 
-    Route::get('add',                    'IndexController@create')->name('add');
-    Route::post('store',                 'IndexController@store')->name('store');
-    Route::delete('delete/{products}',   'IndexController@destroy')->name('delete');
+    Route::get('/',                                 'ProductController@index')->name('index');
+    Route::get('/{slug}',                           'ProductController@show')->name('show');
 
+    Route::group(['middleware' => 'auth'], function() {
+        Route::get('/product/create',               'ProductController@create')->name('create');
+        Route::post('/product',                     'ProductController@store')->name('store');
+        Route::delete('/product/{product}',         'ProductController@destroy')->name('delete');
+    });
 });

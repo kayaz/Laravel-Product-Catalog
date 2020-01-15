@@ -20,13 +20,24 @@
 
     </head>
     <body>
-    @auth
-        Witaj: <b>{{ Auth::user()->name }}</b>
-        <a title="Wyloguj" href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();"><span class="fe-lock"></span> Wyloguj</a>
-        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-            @csrf
-        </form>
-    @endauth
+        <header>
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        @auth
+                            Witaj: <b>{{ Auth::user()->name }}</b> -
+                            <a title="Wyloguj" href="{{ route('logout') }}" onclick="document.getElementById('logout-form').submit(); return false">Wyloguj</a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                @csrf
+                            </form>
+                        @endauth
+                        @guest
+                            <a title="Logowanie" href="{{ route('login') }}">Panel administratora</a>
+                        @endguest
+                    </div>
+                </div>
+            </div>
+        </header>
         <main class="pb-5">
             @yield('content')
         </main>

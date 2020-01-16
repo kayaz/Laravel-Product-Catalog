@@ -24,19 +24,17 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('forms.product',
-            [
+        return view('forms.product', [
                 'cardtitle' => 'Dodaj produkt',
                 'thumbwidth' => Product::IMG_WIDTH,
                 'thumbheight' => Product::IMG_HEIGHT
-            ])
-            ->with('entry', Product::make());
+            ])->with('entry', Product::make());
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function store(StoreProduct $request)
@@ -61,7 +59,7 @@ class ProductController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Product  $products
+     * @param  \App\Product $products
      * @return \Illuminate\Http\Response
      */
     public function show($slug)
@@ -73,20 +71,18 @@ class ProductController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Product  $products
+     * @param  \App\Product $id
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function edit($id)
     {
         $product = Product::where('id', $id)->first();
-        return view('forms.product',
-            [
-                'entry' => $product,
-                'cardtitle' => 'Edytuj produkt',
-                'thumbwidth' => Product::IMG_WIDTH,
-                'thumbheight' => Product::IMG_HEIGHT
-            ]
-        );
+        return view('forms.product', [
+            'entry' => $product,
+            'cardtitle' => 'Edytuj produkt',
+            'thumbwidth' => Product::IMG_WIDTH,
+            'thumbheight' => Product::IMG_HEIGHT
+        ]);
     }
 
     /**
@@ -118,7 +114,7 @@ class ProductController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Product  $products
+     * @param  \App\Product $products
      * @return \Illuminate\Http\Response
      */
     public function destroy(Product $products)

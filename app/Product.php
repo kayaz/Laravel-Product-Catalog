@@ -24,9 +24,9 @@ class Product extends Model
         'slug'
     ];
 
-    public function makeThumb($productname, $file){
-
-        if(File::exists(public_path('uploads/' . $this->photo))){
+    public function makeThumb($productname, $file)
+    {
+        if (File::exists(public_path('uploads/' . $this->photo))) {
             File::delete([
                 public_path('uploads/' . $this->photo),
                 public_path('uploads/thumbs/' . $this->photo)
@@ -44,7 +44,8 @@ class Product extends Model
         $this->update(['photo' => $name ]);
     }
 
-    public function deleteThumb(){
+    public function deleteThumb()
+    {
         File::delete([
             public_path('uploads/' . $this->photo),
             public_path('uploads/thumbs/' . $this->photo)

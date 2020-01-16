@@ -39,12 +39,17 @@ header {padding:20px;border-bottom:1px solid #7abaff}
     font-weight: 700;
     display: block;
 }
+.product-content .price-beforepromo {font-size:10px;color:#A9A9A9;font-weight:400}
+.product-content .price-promo {font-weight: 700;font-size:21px;color:red}
+
 
 #product-admin {padding:30px;text-align:center}
 
 /* Product card
 ================================================== */
 .singleproduct-content .price {color: #16a085;font-size:35px;font-weight:700}
+.singleproduct-content .price-beforepromo {font-size:17px;color:#A9A9A9;font-weight:400}
+.singleproduct-content .price-promo {font-weight: 700;font-size:35px;color:red}
 .product-desc {margin-top:20px;padding:30px 0;border-top: 1px solid rgba(0,0,0,.1)}
 #product form {display: inline-block}
 
@@ -56,3 +61,5 @@ header {padding:20px;border-bottom:1px solid #7abaff}
 
 .form-group.form-group-submit {margin:30px 0 0}
 .form-group.form-group-submit .col-12 {padding:0}
+
+.alert-danger ul {padding: 0 0 0 15px;margin:0}

@@ -5,20 +5,26 @@
         <div class="row">
             <div class="col-6">
                 <div class="singleproduct-image">
-                    <img src="https://via.placeholder.com/540x680" alt="{{ $product->name }}">
+                    <img src="{{asset('uploads/'.$product->photo) }}" alt="{{ $product->name }}">
                 </div>
             </div>
             <div class="col-6">
                 <div class="singleproduct-content">
                     <h2>{{ $product->name }}</h2>
-                    <div class="price">{{ $product->price }} zł</div>
+
+                    @if ($product->price_promo)
+                        <div class="price-promo">{{ $product->price_promo }} zł</div>
+                        <div class="price-beforepromo"><s>{{ $product->price }} zł</s></div>
+                    @else
+                        <div class="price">{{ $product->price }} zł</div>
+                    @endif
 
                     <div class="product-desc">
                         <p>{{ $product->description }}</p>
                     </div>
                     <a href="{{route('product.index')}}" class="btn btn-primary">Wróć do katalogu</a>
                     @auth
-                    <a href="#" class="btn btn-success">Edytuj produkt</a>
+                    <a href="{{route('product.edit', $product->id)}}" class="btn btn-success">Edytuj produkt</a>
                     <form method="POST" action="{{route('product.delete', $product->id)}}">
                         {{ csrf_field() }}
                         {{ method_field('DELETE') }}

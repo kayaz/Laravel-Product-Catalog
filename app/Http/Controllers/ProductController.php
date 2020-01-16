@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreProduct;
 use App\Product;
-use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
@@ -38,22 +37,23 @@ class ProductController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function store(StoreProduct $request)
     {
-        Product::create($request->only(
+        $product = Product::create($request->only(
             [
                 'name',
                 'price',
+                'price_promo',
                 'description',
                 'slug'
             ]
         ));
 
-//        if ($request->hasFile('plik')) {
-//            $news->makeThumb($request->nazwa, $request->file('plik'));
-//        }
+        if ($request->hasFile('photo')) {
+            $product->makeThumb($request->name, $request->file('photo'));
+        }
 
         return redirect('/')->with('success', 'Nowy produkt dodany');
     }
@@ -74,11 +74,19 @@ class ProductController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  \App\Product  $products
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function edit(Product $products)
+    public function edit($id)
     {
-        //
+        $product = Product::where('id', $id)->first();
+        return view('forms.product',
+            [
+                'entry' => $product,
+                'cardtitle' => 'Edytuj produkt',
+                'thumbwidth' => Product::IMG_WIDTH,
+                'thumbheight' => Product::IMG_HEIGHT
+            ]
+        );
     }
 
     /**
@@ -86,11 +94,25 @@ class ProductController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Product  $products
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function update(Request $request, Product $products)
+    public function update(StoreProduct $request, Product $products)
     {
-        //
+        $products->update($request->only(
+            [
+                'name',
+                'price',
+                'price_promo',
+                'description',
+                'slug'
+            ]
+        ));
+
+        if ($request->hasFile('photo')) {
+            $products->makeThumb($request->name, $request->file('photo'));
+        }
+
+        return redirect('/')->with('success', 'Produkt zaktualizowany');
     }
 
     /**
@@ -101,7 +123,7 @@ class ProductController extends Controller
      */
     public function destroy(Product $products)
     {
-        //$products->deleteThumb();
+        $products->deleteThumb();
         $products->delete();
         return redirect('/')->with('success', 'Produkt usunięty');
     }

@@ -8,8 +8,8 @@
                     <form method="POST" action="{{route('product.update', $entry->id)}}" enctype="multipart/form-data">
                     @method('PUT')
                 @else
-                <form method="POST" action="{{route('product.store')}}" enctype="multipart/form-data">
-                    @endif
+                    <form method="POST" action="{{route('product.store')}}" enctype="multipart/form-data">
+                @endif
                     @csrf
                     <div class="container-fluid">
                         <div class="card">
@@ -20,6 +20,7 @@
                                     <div class="col-12">
                                         @include('form-elements.input-text', ['label' => 'Nazwa produktu', 'name' => 'name', 'value' => $entry->name])
                                         @include('form-elements.input-text', ['label' => 'Cena', 'name' => 'price', 'value' => $entry->price])
+                                        @include('form-elements.input-text', ['label' => 'Cena promocyjna', 'name' => 'price_promo', 'value' => $entry->price_promo])
                                         @include('form-elements.input-file', ['label' => 'Zdjęcie', 'sublabel' => '(wymiary: '.$thumbwidth.'px / '.$thumbheight.'px)', 'name' => 'photo'])
                                         @include('form-elements.textarea', ['label' => 'Opis produktu', 'name' => 'description', 'value' => $entry->description, 'rows' => 11])
                                     </div>
